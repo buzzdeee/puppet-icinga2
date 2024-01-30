@@ -43,7 +43,7 @@ class icinga2::params {
 
   ##################
   # Icinga 2 parameters by OS/release
-  case $::operatingsystem {
+  case $facts['os']['name'] {
     'CentOS', 'RedHat', 'Scientific', 'OracleLinux', 'Amazon': {
 
       #Packages for Nagios plugins:
@@ -116,6 +116,6 @@ class icinga2::params {
       $checkplugin_libdir   = '/usr/local/libexec/nagios'
     }
     #Fail if we're on any other OS:
-    default: { fail("${::operatingsystem} is not supported!") }
+    default: { fail("${facts['os']['name']} is not supported!") }
   }
 }
