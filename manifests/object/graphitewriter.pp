@@ -15,10 +15,10 @@ define icinga2::object::graphitewriter (
   $host_name_template     = undef,
   $service_name_template  = undef,
   # Only avaiable in icinga2 >= 2.4
-  $enable_send_thresholds = undef,
-  $enable_send_metadata   = undef,
+  Optional[Boolean]	$enable_send_thresholds = undef,
+  Optional[Boolean]	$enable_send_metadata   = undef,
   # This will be only avaiable in some icinga 2 versions for examlple 2.4
-  $enable_legacy_mode     = undef,
+  Optional[Boolean]	$enable_legacy_mode     = undef,
   # Put the object files this defined type generates in features-available
   # since the Graphite writer feature is one that has to be explicitly enabled.
   $target_dir             = '/etc/icinga2/objects/graphitewriters',
@@ -26,18 +26,6 @@ define icinga2::object::graphitewriter (
 ) {
   # Do some validation
   validate_string($host)
-
-  if $enable_send_thresholds != undef {
-    validate_bool($enable_send_thresholds)
-  }
-
-  if $enable_send_metadata != undef {
-    validate_bool($enable_send_metadata)
-  }
-
-  if $enable_legacy_mode != undef {
-    validate_bool($enable_legacy_mode)
-  }
 
   file { "${target_dir}/${file_name}":
     ensure  => file,

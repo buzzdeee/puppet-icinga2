@@ -19,7 +19,7 @@ define icinga2::object::checkcommand (
   $checkcommand_template_module          = 'icinga2',
   $cmd_path                              = 'PluginDir',
   $env                                   = {},
-  $refresh_icinga2_service               = true,
+  Boolean	$refresh_icinga2_service               = true,
   $sudo                                  = false,
   $sudo_cmd                              = '/usr/bin/sudo',
   $target_dir                            = '/etc/icinga2/objects/checkcommands',
@@ -54,7 +54,6 @@ define icinga2::object::checkcommand (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_re($target_file_mode, '^\d{4}$')
-  validate_bool($refresh_icinga2_service)
 
 
   #If the refresh_icinga2_service parameter is set to true...

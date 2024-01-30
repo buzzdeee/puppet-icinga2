@@ -11,7 +11,7 @@
 #
 class icinga2 (
   $config_template                        = $::icinga2::params::config_template,
-  $default_features                       = true,
+  Boolean 	$default_features                       = true,
   $db_type                                = $::icinga2::params::db_type,
   $db_host                                = 'localhost',
   $db_port                                = undef,
@@ -19,15 +19,15 @@ class icinga2 (
   $db_user                                = $::icinga2::params::db_user,
   $db_pass                                = $::icinga2::params::db_pass,
   $db_schema                              = undef,
-  $manage_database                        = false,
-  $manage_repos                           = $::icinga2::params::manage_repos,
-  $manage_service                         = $::icinga2::params::manage_service,
-  $use_debmon_repo                        = $::icinga2::params::use_debmon_repo,
-  $install_plugins                        = true,
-  $install_mailutils                      = true,
+  Boolean	$manage_database                        = false,
+  Boolean	$manage_repos                           = $::icinga2::params::manage_repos,
+  Boolean	$manage_service                         = $::icinga2::params::manage_service,
+  Boolean	$use_debmon_repo                        = $::icinga2::params::use_debmon_repo,
+  Boolean	$install_plugins                        = true,
+  Boolean	$install_mailutils                      = true,
   $package_ensure                         = installed,
   $purge_configs                          = true,
-  $purge_confd                            = false,
+  Boolean	$purge_confd                            = false,
   $plugin_packages                        = $::icinga2::params::plugin_packages,
   $plugin_packages_extra                  = [],
   $checkplugin_libdir                     = $::icinga2::params::checkplugin_libdir,
@@ -39,16 +39,9 @@ class icinga2 (
   $pid_file                               = $::icinga2::params::pid_file,
   $restart_cmd                            = $::icinga2::params::restart_cmd,
 ) inherits ::icinga2::params {
-  # TODO: temporary parameter until we provide some default templates
-  validate_bool($purge_confd)
   if $purge_confd {
     warning('icinga2::purge_confd is a temporary parameter and will be removed again!')
   }
-
-  validate_bool($manage_database)
-  validate_bool($manage_service)
-  validate_bool($manage_repos)
-  validate_bool($use_debmon_repo)
 
   if $manage_repos == true {
     include icinga2::repo

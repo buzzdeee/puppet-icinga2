@@ -22,7 +22,7 @@ define icinga2::object::usergroup (
   $target_file_mode        = $::icinga2::config_mode,
   $assign_where            = undef,
   $ignore_where            = undef,
-  $refresh_icinga2_service = true
+  Boolean	$refresh_icinga2_service = true
 ) {
 
   validate_string($object_usergroup_name)
@@ -34,7 +34,6 @@ define icinga2::object::usergroup (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

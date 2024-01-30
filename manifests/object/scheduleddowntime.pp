@@ -15,7 +15,7 @@ define icinga2::object::scheduleddowntime (
   $service_name                 = undef,
   $author                       = undef,
   $comment                      = undef,
-  $fixed                        = true,
+  Boolean	$fixed                        = true,
   $duration                     = undef,
   $ranges                       = {},
   $target_dir                   = '/etc/icinga2/objects/scheduleddowntimes',
@@ -24,7 +24,7 @@ define icinga2::object::scheduleddowntime (
   $target_file_owner            = $::icinga2::config_owner,
   $target_file_group            = $::icinga2::config_group,
   $target_file_mode             = $::icinga2::config_mode,
-  $refresh_icinga2_service      = true
+  Boolean	$refresh_icinga2_service      = true
 ) {
 
   #Do some validation of the define's parameters:
@@ -35,7 +35,6 @@ define icinga2::object::scheduleddowntime (
   }
   validate_string($author)
   validate_string($comment)
-  validate_bool($fixed)
   validate_string($duration)
   validate_hash($ranges)
   validate_string($target_dir)
@@ -43,7 +42,6 @@ define icinga2::object::scheduleddowntime (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

@@ -25,7 +25,7 @@ define icinga2::object::eventcommand (
   $target_file_owner       = $::icinga2::config_owner,
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
-  $refresh_icinga2_service = true
+  Boolean $refresh_icinga2_service = true
 ) {
 
   #Do some validation of the class' parameters:
@@ -46,7 +46,6 @@ define icinga2::object::eventcommand (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_re($target_file_mode, '^\d{4}$')
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

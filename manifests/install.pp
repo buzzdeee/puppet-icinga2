@@ -8,12 +8,10 @@ class icinga2::install {
     ensure   => $::icinga2::package_ensure,
   }
 
-  validate_bool($::icinga2::manage_service)
   if $::icinga2::manage_service == true {
     Package['icinga2'] ~> Class['::icinga2::service']
   }
 
-  validate_bool($::icinga2::install_plugins)
   if $::icinga2::install_plugins == true {
     ensure_packages($::icinga2::plugin_packages)
   }
@@ -22,7 +20,6 @@ class icinga2::install {
     ensure_packages($::icinga2::plugin_packages_extra)
   }
 
-  validate_bool($::icinga2::install_mailutils)
   if $::icinga2::install_mailutils == true {
     ensure_packages($::icinga2::params::mail_package)
   }

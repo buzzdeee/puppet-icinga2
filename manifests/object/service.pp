@@ -22,7 +22,7 @@ define icinga2::object::service (
   $check_period            = undef,
   $check_interval          = undef,
   $retry_interval          = undef,
-  $enable_notifications    = true,
+  Boolean	$enable_notifications    = true,
   $enable_active_checks    = undef,
   $enable_passive_checks   = undef,
   $enable_event_handler    = undef,
@@ -43,12 +43,11 @@ define icinga2::object::service (
   $target_file_owner       = $::icinga2::config_owner,
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
-  $refresh_icinga2_service = true,
+  Boolean	$refresh_icinga2_service = true,
   $zone                    = undef,
 ) {
 
   validate_string($object_servicename)
-  validate_bool($is_template)
   validate_array($templates)
   validate_string($display_name)
   validate_string($host_name)
@@ -61,7 +60,6 @@ define icinga2::object::service (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

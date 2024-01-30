@@ -11,7 +11,7 @@
 
 define icinga2::object::user (
   $object_username         = $name,
-  $is_template             = false,
+  Boolean	$is_template             = false,
   $templates               = [],
   $display_name            = $name,
   $email                   = undef,
@@ -28,12 +28,11 @@ define icinga2::object::user (
   $target_file_owner       = $::icinga2::config_owner,
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
-  $refresh_icinga2_service = true
+  Boolean	$refresh_icinga2_service = true
 ) {
 
   #Do some validation of the class' parameters:
   validate_string($object_username)
-  validate_bool($is_template)
   validate_array($templates)
   validate_string($display_name)
   validate_array($groups)
@@ -45,7 +44,6 @@ define icinga2::object::user (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

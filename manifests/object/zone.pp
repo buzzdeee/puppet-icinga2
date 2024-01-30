@@ -10,7 +10,7 @@
 #
 define icinga2::object::zone(
   $endpoints  = undef,
-  $global     = false,
+  Boolean	$global     = false,
   $parent     = undef,
   $target_dir = '/etc/icinga2/objects/zones',
   $file_name  = "${name}.conf",
@@ -35,7 +35,6 @@ define icinga2::object::zone(
     validate_string($parent)
   }
   if $global {
-    validate_bool($global)
     if $endpoints or $parent {
       fail('global zones can\'t have endpoints or parents!')
     }

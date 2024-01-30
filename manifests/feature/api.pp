@@ -6,23 +6,19 @@
 # the Puppet agent's certificates.
 #
 class icinga2::feature::api (
-  $accept_commands = false,
-  $accept_config   = false,
+  Boolean 	$accept_commands = false,
+  Boolean	$accept_config   = false,
   $ca_path         = '/etc/icinga2/pki/ca.crt',
   $cert_path       = "/etc/icinga2/pki/${::fqdn}.crt",
   $key_path        = "/etc/icinga2/pki/${::fqdn}.key",
   $crl_path        = undef,
   $bind_host       = undef,
   $bind_port       = undef,
-  $ticket_salt     = false,
+  Optional[Boolean]	$ticket_salt     = false,
   $hostname        = $::fqdn,
-  $manage_zone     = true,
+  Boolean	$manage_zone     = true,
   $parent_zone     = undef,
 ) {
-
-  validate_bool($accept_commands)
-  validate_bool($accept_config)
-  validate_bool($manage_zone)
 
   validate_absolute_path($ca_path)
   validate_absolute_path($cert_path)
@@ -33,10 +29,6 @@ class icinga2::feature::api (
   }
   if $bind_port {
     validate_integer($bind_port)
-  }
-
-  if $ticket_salt {
-    validate_bool($ticket_salt)
   }
 
   ::icinga2::feature { 'api':

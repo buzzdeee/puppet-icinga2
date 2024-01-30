@@ -3,7 +3,6 @@
 # Manages the config environment of Icinga 2.
 #
 class icinga2::config {
-  validate_bool($::icinga2::default_features)
 
   File {
     owner => $::icinga2::config_owner,

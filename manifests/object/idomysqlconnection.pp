@@ -12,7 +12,7 @@ define icinga2::object::idomysqlconnection (
   $table_prefix         = 'icinga_',
   $instance_name        = 'default',
   $instance_description = undef,
-  $enable_ha            = true,
+  Boolean	$enable_ha            = true,
   $cleanup              = {
     acknowledgements_age           => 0,
     commenthistory_age             => 0,
@@ -33,7 +33,7 @@ define icinga2::object::idomysqlconnection (
   $categories      = [],
   $target_file_name     = "${name}.conf",
   $target_dir           = '/etc/icinga2/objects/idomysqlconnections',
-  $refresh_service      = $::icinga2::manage_service,
+  Boolean	$refresh_service      = $::icinga2::manage_service,
 ) {
 
   if ! defined(Class['icinga2']) {
@@ -47,11 +47,9 @@ define icinga2::object::idomysqlconnection (
   validate_string($database)
   validate_string($table_prefix)
   validate_string($instance_name)
-  validate_bool($enable_ha)
   validate_hash($cleanup)
   validate_array($categories)
   validate_absolute_path($target_dir)
-  validate_bool($refresh_service)
 
   Class['icinga2::config'] ->
   file { "${target_dir}/${target_file_name}":

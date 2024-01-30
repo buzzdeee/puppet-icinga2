@@ -17,8 +17,8 @@ define icinga2::object::apply_dependency (
   $parent_service_name     = undef,
   $child_host_name         = undef,
   $child_service_name      = undef,
-  $disable_checks          = undef,
-  $disable_notifications   = undef,
+  Optional[Boolean]	$disable_checks          = undef,
+  Optional[Boolean]	$disable_notifications   = undef,
   $period                  = undef,
   $states                  = [],
   $assign_where            = undef,
@@ -29,7 +29,7 @@ define icinga2::object::apply_dependency (
   $target_file_owner       = $::icinga2::config_owner,
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
-  $refresh_icinga2_service = true,
+  Boolean	$refresh_icinga2_service = true,
 ) {
 
   # Do some validation of the class' parameters:
@@ -39,8 +39,6 @@ define icinga2::object::apply_dependency (
   validate_string($child_host_name)
   validate_string($child_service_name)
   validate_string($parent_service_name)
-  #  validate_bool($disable_checks)
-  #  validate_bool($disable_notifications)
   validate_string($period)
   validate_array($states)
   validate_string($target_dir)
@@ -48,7 +46,6 @@ define icinga2::object::apply_dependency (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_bool($refresh_icinga2_service)
 
   validate_re($object_type, ['^Host', '^Service'])
 

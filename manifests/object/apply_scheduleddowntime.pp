@@ -17,7 +17,7 @@ define icinga2::object::apply_scheduleddowntime (
   $apply        = 'Service',
   $templates    = [],
   $ignore_where = undef,
-  $fixed        = undef,
+  Optional[Boolean]	$fixed        = undef,
   $duration     = undef,
   $target_dir   = '/etc/icinga2/objects/applys',
   $file_name    = "${name}.conf",
@@ -27,9 +27,6 @@ define icinga2::object::apply_scheduleddowntime (
   validate_array($templates)
   validate_string($author)
   validate_string($comment)
-  if $fixed != undef {
-    validate_bool($fixed)
-  }
   validate_string($duration)
   validate_hash($ranges)
 

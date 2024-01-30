@@ -11,7 +11,7 @@
 
 define icinga2::object::notification (
   $object_notificationname = $name,
-  $is_template             = false,
+  Boolean	$is_template             = false,
   $templates               = [],
   $command                 = undef,
   $host_name               = undef,
@@ -30,12 +30,11 @@ define icinga2::object::notification (
   $target_file_owner       = $::icinga2::config_owner,
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
-  $refresh_icinga2_service = true
+  Boolean	$refresh_icinga2_service = true
 ) {
 
   #Do some validation of the class' parameters:
   validate_string($object_notificationname)
-  validate_bool($is_template)
   validate_string($command)
   if $host_name {
     validate_string($host_name)
@@ -68,7 +67,6 @@ define icinga2::object::notification (
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_re($target_file_mode, '^\d{4}$')
-  validate_bool($refresh_icinga2_service)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {
