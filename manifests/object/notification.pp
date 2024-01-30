@@ -12,18 +12,18 @@
 define icinga2::object::notification (
   $object_notificationname = $name,
   Boolean	$is_template             = false,
-  $templates               = [],
+  Array		$templates               = [],
   $command                 = undef,
   $host_name               = undef,
   $service_name            = undef,
   $vars                    = {},
-  $users                   = [],
-  $user_groups             = [],
+  Array		$users                   = [],
+  Array		$user_groups             = [],
   $times                   = {},
   $interval                = undef,
   $period                  = undef,
-  $types                   = [],
-  $states                  = [],
+  Array		$types                   = [],
+  Array		$states                  = [],
   $target_dir              = '/etc/icinga2/objects/notifications',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -43,8 +43,6 @@ define icinga2::object::notification (
     validate_string($service_name)
   }
   validate_hash($vars)
-  validate_array($users)
-  validate_array($user_groups)
   validate_hash($times)
   if $interval {
     validate_re($interval, '^\d+m?$')
@@ -52,12 +50,10 @@ define icinga2::object::notification (
   if $period {
     validate_string($period)
   }
-  validate_array($types)
   #Array concatenation not available,
   #if $types - ['DowntimeStart','DowntimeEnd','DowntimeRemoved','Custom','Acknowledgement','Problem','Recovery','FlappingStart','FlappingEnd'] != [] {
   #  fail ('You are using unavailable notification type filter.')
   #}
-  validate_array($states)
   #Array concatenation not available,
   #if $states - ['OK','Warning','Critical','Unknown','Up','Down'] != [] {
   #  fail ('You are using unavailable state type filter.')

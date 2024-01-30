@@ -12,8 +12,8 @@
 define icinga2::object::hostgroup (
   $object_hostgroup_name   = $name,
   $display_name            = $name,
-  $templates               = [],
-  $groups                  = [],
+  Array		$templates               = [],
+  Array		$groups                  = [],
   $target_dir              = '/etc/icinga2/objects/hostgroups',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -27,9 +27,7 @@ define icinga2::object::hostgroup (
 
   #Do some validation of the class' parameters:
   validate_string($object_hostgroup_name)
-  validate_array($templates)
   validate_string($display_name)
-  validate_array($groups)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

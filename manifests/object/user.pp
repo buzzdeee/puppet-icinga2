@@ -12,16 +12,16 @@
 define icinga2::object::user (
   $object_username         = $name,
   Boolean	$is_template             = false,
-  $templates               = [],
+  Array		$templates               = [],
   $display_name            = $name,
   $email                   = undef,
   $pager                   = undef,
   $vars                    = {},
-  $groups                  = [],
+  Array		$groups                  = [],
   $enable_notifications    = true,
   $period                  = undef,
-  $types                   = [],
-  $states                  = [],
+  Array		$types                   = [],
+  Array		$states                  = [],
   $target_dir              = '/etc/icinga2/objects/users',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -33,12 +33,8 @@ define icinga2::object::user (
 
   #Do some validation of the class' parameters:
   validate_string($object_username)
-  validate_array($templates)
   validate_string($display_name)
-  validate_array($groups)
   validate_hash($vars)
-  validate_array($types)
-  validate_array($states)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

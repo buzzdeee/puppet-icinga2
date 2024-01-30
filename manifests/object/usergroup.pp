@@ -12,8 +12,8 @@
 define icinga2::object::usergroup (
   $object_usergroup_name   = $name,
   $display_name            = $name,
-  $templates               = [],
-  $groups                  = [],
+  Array		$templates               = [],
+  Array		$groups                  = [],
   $target_dir              = '/etc/icinga2/objects/usergroups',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -27,8 +27,6 @@ define icinga2::object::usergroup (
 
   validate_string($object_usergroup_name)
   validate_string($display_name)
-  validate_array($templates)
-  validate_array($groups)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

@@ -15,7 +15,6 @@ class icinga2::install {
   if $::icinga2::install_plugins == true {
     ensure_packages($::icinga2::plugin_packages)
   }
-  validate_array($::icinga2::plugin_packages_extra)
   if count($::icinga2::plugin_packages_extra) > 0 {
     ensure_packages($::icinga2::plugin_packages_extra)
   }

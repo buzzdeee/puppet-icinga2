@@ -15,7 +15,7 @@ define icinga2::object::apply_scheduleddowntime (
   $assign_where,
   $ranges,
   $apply        = 'Service',
-  $templates    = [],
+  Array		$templates    = [],
   $ignore_where = undef,
   Optional[Boolean]	$fixed        = undef,
   $duration     = undef,
@@ -24,7 +24,6 @@ define icinga2::object::apply_scheduleddowntime (
 ) {
 
   validate_re($apply, '^(Host|Service)$', 'ScheduledDowntime must either apply to a Host or Service!')
-  validate_array($templates)
   validate_string($author)
   validate_string($comment)
   validate_string($duration)

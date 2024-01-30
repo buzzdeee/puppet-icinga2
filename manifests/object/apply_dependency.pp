@@ -20,7 +20,7 @@ define icinga2::object::apply_dependency (
   Optional[Boolean]	$disable_checks          = undef,
   Optional[Boolean]	$disable_notifications   = undef,
   $period                  = undef,
-  $states                  = [],
+  Array		$states                  = [],
   $assign_where            = undef,
   $ignore_where            = undef,
   $target_dir              = '/etc/icinga2/objects/applys',
@@ -40,7 +40,6 @@ define icinga2::object::apply_dependency (
   validate_string($child_service_name)
   validate_string($parent_service_name)
   validate_string($period)
-  validate_array($states)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

@@ -13,12 +13,12 @@
 define icinga2::object::apply_service (
   $object_servicename      = $name,
   $apply                   = 'to Host',
-  $templates               = ['generic-service'],
+  Array		$templates               = ['generic-service'],
   $display_name            = $name,
   $assign_where            = undef,
   $ignore_where            = undef,
   $command_endpoint        = undef,
-  $groups                  = [],
+  Array		$groups                  = [],
   $vars                    = {},
   $check_command           = undef,
   $max_check_attempts      = undef,
@@ -47,21 +47,17 @@ define icinga2::object::apply_service (
   $target_file_group       = $::icinga2::config_group,
   $target_file_mode        = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service = true,
-  $custom_prepend          = [],
-  $custom_append           = [],
+  Array		$custom_prepend          = [],
+  Array		$custom_append           = [],
 ) {
 
   validate_string($object_servicename)
-  validate_array($templates)
-  validate_array($groups)
   validate_hash($vars)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)
   validate_string($target_file_group)
   validate_string($target_file_mode)
-  validate_array($custom_prepend)
-  validate_array($custom_append)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

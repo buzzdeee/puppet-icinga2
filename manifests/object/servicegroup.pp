@@ -12,8 +12,8 @@
 define icinga2::object::servicegroup (
   $object_servicegroup_name = $name,
   $display_name             = $name,
-  $templates                = [],
-  $groups                   = [],
+  Array		$templates                = [],
+  Array		$groups                   = [],
   $target_dir               = '/etc/icinga2/objects/servicegroups',
   $target_file_name         = "${name}.conf",
   $target_file_ensure       = file,
@@ -26,9 +26,7 @@ define icinga2::object::servicegroup (
 ) {
 
   validate_string($object_servicegroup_name)
-  validate_array($templates)
   validate_string($display_name)
-  validate_array($groups)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

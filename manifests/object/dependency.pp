@@ -19,7 +19,7 @@ define icinga2::object::dependency (
   Optional[Boolean]	$disable_checks          = undef,
   Optional[Boolean]	$disable_notifications   = undef,
   $period                  = undef,
-  $states                  = [],
+  Array		$states                  = [],
   $target_dir              = '/etc/icinga2/objects/dependencies',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -38,7 +38,6 @@ define icinga2::object::dependency (
   validate_string($child_service_name)
   validate_string($parent_service_name)
   validate_string($period)
-  validate_array($states)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)

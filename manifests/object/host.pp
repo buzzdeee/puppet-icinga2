@@ -15,8 +15,8 @@ define icinga2::object::host (
   $ipv4_address            = $ipaddress,
   $ipv6_address            = undef,
   Boolean	$is_template             = false,
-  $templates               = ['generic-host'],
-  $groups                  = [],
+  Array		$templates               = ['generic-host'],
+  Array		$groups                  = [],
   $vars                    = {},
   $check_command           = undef,
   $max_check_attempts      = undef,
@@ -47,15 +47,13 @@ define icinga2::object::host (
   Boolean	$refresh_icinga2_service = true,
   $zone                    = undef,
   $command_endpoint        = undef,
-  $custom_prepend          = [],
-  $custom_append           = [],
+  Array		$custom_prepend          = [],
+  Array		$custom_append           = [],
 ) {
 
   validate_string($object_hostname)
-  validate_array($templates)
   validate_string($display_name)
   validate_string($ipv4_address)
-  validate_array($groups)
   validate_hash($vars)
   validate_string($target_dir)
   validate_string($target_file_name)
@@ -64,8 +62,6 @@ define icinga2::object::host (
   validate_string($target_file_mode)
   validate_string($zone)
   validate_string($command_endpoint)
-  validate_array($custom_prepend)
-  validate_array($custom_append)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

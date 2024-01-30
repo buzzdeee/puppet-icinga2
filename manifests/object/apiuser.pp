@@ -12,7 +12,7 @@
 define icinga2::object::apiuser (
   $password    = undef,
   $client_cn   = undef,
-  $permissions = ['*'],
+  Array		$permissions = ['*'],
   $target_dir  = '/etc/icinga2/objects/apiusers',
   $file_name   = "${name}.conf",
 ) {
@@ -24,7 +24,6 @@ define icinga2::object::apiuser (
   ensure_resource('icinga2::config::objectdir', 'apiusers')
 
   validate_absolute_path($target_dir)
-  validate_array($permissions)
   if $client_cn {
     validate_string($client_cn)
   }

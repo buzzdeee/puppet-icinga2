@@ -29,7 +29,7 @@ class icinga2 (
   $purge_configs                          = true,
   Boolean	$purge_confd                            = false,
   $plugin_packages                        = $::icinga2::params::plugin_packages,
-  $plugin_packages_extra                  = [],
+  Array		$plugin_packages_extra                  = [],
   $checkplugin_libdir                     = $::icinga2::params::checkplugin_libdir,
   $config_group                           = $::icinga2::params::config_group,
   $config_mode                            = $::icinga2::params::config_mode,

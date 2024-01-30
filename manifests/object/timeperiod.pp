@@ -11,7 +11,7 @@
 
 define icinga2::object::timeperiod (
   $object_name                   = $name,
-  $templates                     = ['legacy-timeperiod'],
+  Array		$templates                     = ['legacy-timeperiod'],
   $timeperiod_display_name       = undef,
   $methods                       = undef,
   $ranges                        = {},
@@ -25,7 +25,6 @@ define icinga2::object::timeperiod (
 ) {
 
   validate_string($object_name)
-  validate_array($templates)
   validate_string($timeperiod_display_name)
   if $methods {
     validate_string($methods)

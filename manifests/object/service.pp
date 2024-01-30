@@ -11,11 +11,11 @@
 define icinga2::object::service (
   $object_servicename      = $name,
   $is_template             = false,
-  $templates               = ['generic-service'],
+  Array		$templates               = ['generic-service'],
   $display_name            = $name,
   $host_name               = $fqdn,
   $command_endpoint        = undef,
-  $groups                  = [],
+  Array		$groups                  = [],
   $vars                    = {},
   $check_command           = undef,
   $max_check_attempts      = undef,
@@ -48,12 +48,10 @@ define icinga2::object::service (
 ) {
 
   validate_string($object_servicename)
-  validate_array($templates)
   validate_string($display_name)
   validate_string($host_name)
   validate_string($command_endpoint)
   validate_string($zone)
-  validate_array($groups)
   validate_hash($vars)
   validate_string($target_dir)
   validate_string($target_file_name)

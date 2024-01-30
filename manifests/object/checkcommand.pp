@@ -10,7 +10,7 @@
 #
 
 define icinga2::object::checkcommand (
-  $command,
+  Variant[Array, String]	$command,
   $object_checkcommandname               = $name,
   $arguments                             = {},
   $checkcommand_file_distribution_method = 'content',
@@ -28,7 +28,7 @@ define icinga2::object::checkcommand (
   $target_file_mode                      = $::icinga2::config_mode,
   $target_file_name                      = "${name}.conf",
   $target_file_owner                     = $::icinga2::config_owner,
-  $templates                             = ['plugin-check-command'],
+  Array		$templates                             = ['plugin-check-command'],
   $timeout                               = undef,
   $vars                                  = {},
   #$methods                               = undef, Need to get more details about this attribute
@@ -36,13 +36,6 @@ define icinga2::object::checkcommand (
 
   #Do some validation of the class parameters:
   validate_string($object_checkcommandname)
-  validate_array($templates)
-  if ! is_array($command) {
-    validate_string($command)
-  }
-  if ! is_string($command) {
-    validate_array($command)
-  }
   validate_string($cmd_path)
   validate_hash($env)
   validate_hash($vars)

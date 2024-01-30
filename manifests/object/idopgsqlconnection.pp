@@ -30,7 +30,7 @@ define icinga2::object::idopgsqlconnection (
     servicechecks_age              => 0,
     systemcommands_age             => 0,
   },
-  $categories           = [],
+  Array		$categories           = [],
   $target_file_name     = "${name}.conf",
   $target_dir           = '/etc/icinga2/objects/idopgsqlconnections',
   Boolean	$refresh_service      = $::icinga2::manage_service,
@@ -48,7 +48,6 @@ define icinga2::object::idopgsqlconnection (
   validate_string($table_prefix)
   validate_string($instance_name)
   validate_hash($cleanup)
-  validate_array($categories)
   validate_absolute_path($target_dir)
 
   Class['icinga2::config'] ->

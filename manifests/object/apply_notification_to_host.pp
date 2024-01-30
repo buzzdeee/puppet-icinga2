@@ -12,18 +12,18 @@
 
 define icinga2::object::apply_notification_to_host (
   $object_notificationname = $name,
-  $templates               = [],
+  Array		$templates               = [],
   $assign_where            = undef,
   $ignore_where            = undef,
   $command                 = undef,
   $vars                    = {},
-  $users                   = [],
-  $user_groups             = [],
+  Array		$users                   = [],
+  Array		$user_groups             = [],
   $times                   = {},
   $interval                = undef,
   $period                  = undef,
-  $types                   = [],
-  $states                  = [],
+  Array		$types                   = [],
+  Array		$states                  = [],
   $target_dir              = '/etc/icinga2/objects/applys',
   $target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
@@ -35,11 +35,8 @@ define icinga2::object::apply_notification_to_host (
 
   #Do some validation of the class' parameters:
   validate_string($object_notificationname)
-  validate_array($templates)
   validate_string($command)
   validate_hash($vars)
-  validate_array($users)
-  validate_array($user_groups)
   validate_hash($times)
   if $interval {
     validate_string($interval)
@@ -47,8 +44,6 @@ define icinga2::object::apply_notification_to_host (
   if $period {
     validate_string($period)
   }
-  validate_array($types)
-  validate_array($states)
   validate_string($target_dir)
   validate_string($target_file_name)
   validate_string($target_file_owner)
