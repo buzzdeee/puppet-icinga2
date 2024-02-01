@@ -4,11 +4,10 @@
 #
 class icinga2::feature::debuglog (
   $severity = 'debug',
-  $path     = '/var/log/icinga2/debug.log'
+  Stdlib::Compat::String	$path     = '/var/log/icinga2/debug.log'
 ) {
 
   validate_string($severity)
-  validate_absolute_path($path)
 
   ::icinga2::feature { 'debuglog':
     content => template('icinga2/feature/debuglog.conf.erb'),

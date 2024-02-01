@@ -13,7 +13,7 @@ define icinga2::object::endpoint (
   $host         = undef,
   $port         = undef,
   $log_duration = undef,
-  $target_dir   = '/etc/icinga2/objects/endpoints',
+  Stdlib::Compat::String	$target_dir   = '/etc/icinga2/objects/endpoints',
   $file_name    = "${name}.conf",
 ) {
 
@@ -23,7 +23,6 @@ define icinga2::object::endpoint (
 
   ensure_resource('icinga2::config::objectdir', 'endpoints')
 
-  validate_absolute_path($target_dir)
   if $host {
     validate_string($host)
   }

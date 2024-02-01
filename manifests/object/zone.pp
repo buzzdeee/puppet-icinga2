@@ -12,7 +12,7 @@ define icinga2::object::zone(
   $endpoints  = undef,
   Boolean	$global     = false,
   $parent     = undef,
-  $target_dir = '/etc/icinga2/objects/zones',
+  Stdlib::Compat::String	$target_dir = '/etc/icinga2/objects/zones',
   $file_name  = "${name}.conf",
 ) {
 
@@ -40,7 +40,6 @@ define icinga2::object::zone(
     }
   }
 
-  validate_absolute_path($target_dir)
   validate_string($file_name)
 
   file { "icinga2 object zone ${name}":

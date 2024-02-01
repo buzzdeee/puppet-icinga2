@@ -9,7 +9,7 @@ class icinga2::pki::puppet(
   $cert_source = "${::settings::ssldir}/certs/${facts['networking']['fqdn']}.pem",
   $key_path    = "/etc/icinga2/pki/${facts['networking']['fqdn']}.key",
   $key_source  = "${::settings::ssldir}/private_keys/${facts['networking']['fqdn']}.pem",
-  $crl_path    = '/etc/icinga2/pki/crl.pem',
+  Stdlib::Compat::String	$crl_path    = '/etc/icinga2/pki/crl.pem',
   $crl_source  = "${::settings::ssldir}/crl.pem",
 ) {
 
@@ -38,8 +38,6 @@ class icinga2::pki::puppet(
   }
 
   if $crl_path {
-    validate_absolute_path($crl_path)
-
     file { 'icinga2-pki-crl':
       ensure => file,
       path   => $crl_path,
