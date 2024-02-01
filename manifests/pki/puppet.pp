@@ -5,10 +5,10 @@
 class icinga2::pki::puppet(
   $ca_path     = '/etc/icinga2/pki/ca.crt',
   $ca_source   = "${::settings::ssldir}/certs/ca.pem",
-  $cert_path   = "/etc/icinga2/pki/${::fqdn}.crt",
-  $cert_source = "${::settings::ssldir}/certs/${::fqdn}.pem",
-  $key_path    = "/etc/icinga2/pki/${::fqdn}.key",
-  $key_source  = "${::settings::ssldir}/private_keys/${::fqdn}.pem",
+  $cert_path   = "/etc/icinga2/pki/${facts['networking']['fqdn']}.crt",
+  $cert_source = "${::settings::ssldir}/certs/${facts['networking']['fqdn']}.pem",
+  $key_path    = "/etc/icinga2/pki/${facts['networking']['fqdn']}.key",
+  $key_source  = "${::settings::ssldir}/private_keys/${facts['networking']['fqdn']}.pem",
   $crl_path    = '/etc/icinga2/pki/crl.pem',
   $crl_source  = "${::settings::ssldir}/crl.pem",
 ) {

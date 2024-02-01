@@ -6,7 +6,7 @@ class icinga2::pki::icinga (
   $ticket_salt,
   $icinga_ca_host,
   $icinga_ca_port = undef,
-  $hostname       = $::fqdn,
+  $hostname       = $facts['networking']['fqdn'],
 ) {
 
   validate_string($ticket_salt)
@@ -20,7 +20,7 @@ class icinga2::pki::icinga (
     $_icinga_ca_port = ''
   }
 
-  $ticket_id = icinga2_ticket_id($::fqdn, $ticket_salt)
+  $ticket_id = icinga2_ticket_id($facts['networking']['fqdn'], $ticket_salt)
 
   $pki_dir = '/etc/icinga2/pki'
   $ca = "${pki_dir}/ca.crt"
