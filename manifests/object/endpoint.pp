@@ -10,9 +10,9 @@
 #
 
 define icinga2::object::endpoint (
-  $host         = undef,
+  Optional[String]	$host         = undef,
   $port         = undef,
-  $log_duration = undef,
+  Optional[String]	$log_duration = undef,
   Stdlib::Compat::String	$target_dir   = '/etc/icinga2/objects/endpoints',
   $file_name    = "${name}.conf",
 ) {
@@ -22,16 +22,6 @@ define icinga2::object::endpoint (
   }
 
   ensure_resource('icinga2::config::objectdir', 'endpoints')
-
-  if $host {
-    validate_string($host)
-  }
-  if $port {
-    validate_re($port, '^\d{1,5}$')
-  }
-  if $log_duration {
-    validate_string($log_duration)
-  }
 
   file { "icinga2 object endpoint ${name}":
     ensure  => file,

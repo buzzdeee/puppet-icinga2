@@ -51,14 +51,6 @@ define icinga2::object::apply_service (
   Array		$custom_append           = [],
 ) {
 
-  validate_string($object_servicename)
-  validate_hash($vars)
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
-
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {
     $_notify = Class['::icinga2::service']

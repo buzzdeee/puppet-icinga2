@@ -10,37 +10,18 @@
 #
 
 define icinga2::object::statusdatawriter (
-  $object_statusdatawritername = $name,
-  $status_path                 = undef,
-  $objects_path                = undef,
-  $update_interval             = undef,
-  $target_dir                  = '/etc/icinga2/objects/statusdatawriters',
-  $target_file_name            = "${name}.conf",
+  String		$object_statusdatawritername = $name,
+  Optional[String]	$status_path                 = undef,
+  Optional[String]	$objects_path                = undef,
+  Optional[String]	$update_interval             = undef,
+  String		$target_dir                  = '/etc/icinga2/objects/statusdatawriters',
+  String		$target_file_name            = "${name}.conf",
   $target_file_ensure          = file,
-  $target_file_owner           = $::icinga2::config_owner,
-  $target_file_group           = $::icinga2::config_group,
-  $target_file_mode            = $::icinga2::config_mode,
+  String		$target_file_owner           = $::icinga2::config_owner,
+  String		$target_file_group           = $::icinga2::config_group,
+  String		$target_file_mode            = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service     = true
 ) {
-
-  #Do some validation of the class' parameters:
-  if $object_statusdatawritername {
-    validate_string($object_statusdatawritername)
-  }
-  if $status_path {
-    validate_string($status_path)
-  }
-  if $objects_path {
-    validate_string($objects_path)
-  }
-  if $update_interval {
-    validate_string($update_interval)
-  }
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_re($target_file_mode, '^\d{4}$')
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

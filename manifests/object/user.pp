@@ -10,10 +10,10 @@
 #
 
 define icinga2::object::user (
-  $object_username         = $name,
+  String 	$object_username         = $name,
   Boolean	$is_template             = false,
   Array		$templates               = [],
-  $display_name            = $name,
+  String	$display_name            = $name,
   $email                   = undef,
   $pager                   = undef,
   $vars                    = {},
@@ -22,24 +22,14 @@ define icinga2::object::user (
   $period                  = undef,
   Array		$types                   = [],
   Array		$states                  = [],
-  $target_dir              = '/etc/icinga2/objects/users',
-  $target_file_name        = "${name}.conf",
+  String	$target_dir              = '/etc/icinga2/objects/users',
+  String	$target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
-  $target_file_owner       = $::icinga2::config_owner,
-  $target_file_group       = $::icinga2::config_group,
-  $target_file_mode        = $::icinga2::config_mode,
+  String	$target_file_owner       = $::icinga2::config_owner,
+  String	$target_file_group       = $::icinga2::config_group,
+  String	$target_file_mode        = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service = true
 ) {
-
-  #Do some validation of the class' parameters:
-  validate_string($object_username)
-  validate_string($display_name)
-  validate_hash($vars)
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

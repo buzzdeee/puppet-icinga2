@@ -10,39 +10,24 @@
 #
 
 define icinga2::object::dependency (
-  $object_name             = $name,
-  $display_name            = $name,
-  $parent_host_name        = $host_name,
-  $parent_service_name     = undef,
-  $child_host_name         = undef,
-  $child_service_name      = undef,
+  String	$object_name             = $name,
+  String	$display_name            = $name,
+  String	$parent_host_name        = $host_name,
+  Optional[String]	$parent_service_name     = undef,
+  Optional[String]	$child_host_name         = undef,
+  Optional[String]	$child_service_name      = undef,
   Optional[Boolean]	$disable_checks          = undef,
   Optional[Boolean]	$disable_notifications   = undef,
-  $period                  = undef,
+  Optional[String]	$period                  = undef,
   Array		$states                  = [],
-  $target_dir              = '/etc/icinga2/objects/dependencies',
-  $target_file_name        = "${name}.conf",
+  String	$target_dir              = '/etc/icinga2/objects/dependencies',
+  String	$target_file_name        = "${name}.conf",
   $target_file_ensure      = file,
-  $target_file_owner       = $::icinga2::config_owner,
-  $target_file_group       = $::icinga2::config_group,
-  $target_file_mode        = $::icinga2::config_mode,
+  String	$target_file_owner       = $::icinga2::config_owner,
+  String	$target_file_group       = $::icinga2::config_group,
+  String	$target_file_mode        = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service = true
 ) {
-
-  # Do some validation of the class' parameters:
-  validate_string($object_name)
-  validate_string($display_name)
-  validate_string($host_name)
-  validate_string($parent_host_name)
-  validate_string($child_host_name)
-  validate_string($child_service_name)
-  validate_string($parent_service_name)
-  validate_string($period)
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

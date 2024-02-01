@@ -20,13 +20,6 @@ class icinga2::feature::api (
   $parent_zone     = undef,
 ) {
 
-  if $bind_host {
-    validate_string($bind_host)
-  }
-  if $bind_port {
-    validate_integer($bind_port)
-  }
-
   ::icinga2::feature { 'api':
     content => template('icinga2/feature/api.conf.erb'),
   }

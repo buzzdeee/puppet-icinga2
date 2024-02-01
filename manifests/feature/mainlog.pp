@@ -7,8 +7,6 @@ class icinga2::feature::mainlog (
   Stdlib::Compat::String	$path     = '/var/log/icinga2/icinga2.log'
 ) {
 
-  validate_string($severity)
-
   $object_name = 'mainlog'
 
   ::icinga2::feature { 'mainlog':

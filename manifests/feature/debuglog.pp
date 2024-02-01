@@ -7,8 +7,6 @@ class icinga2::feature::debuglog (
   Stdlib::Compat::String	$path     = '/var/log/icinga2/debug.log'
 ) {
 
-  validate_string($severity)
-
   ::icinga2::feature { 'debuglog':
     content => template('icinga2/feature/debuglog.conf.erb'),
   }

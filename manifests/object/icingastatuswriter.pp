@@ -12,26 +12,14 @@
 define icinga2::object::icingastatuswriter (
   $ensure                    = 'file',
   $object_name               = $name,
-  $status_path               = undef,
-  $update_interval           = undef,
-  $target_dir                = '/etc/icinga2/objects/icingastatuswriters',
-  $target_file_name          = "${name}.conf",
-  $target_file_owner         = $::icinga2::config_owner,
-  $target_file_group         = $::icinga2::config_group,
-  $target_file_mode          = $::icinga2::config_mode,
+  Optional[String]	$status_path               = undef,
+  Optional[String]	$update_interval           = undef,
+  String		$target_dir                = '/etc/icinga2/objects/icingastatuswriters',
+  String		$target_file_name          = "${name}.conf",
+  String		$target_file_owner         = $::icinga2::config_owner,
+  String		$target_file_group         = $::icinga2::config_group,
+  String		$target_file_mode          = $::icinga2::config_mode,
 ) {
-
-  if $status_path {
-    validate_string($status_path)
-  }
-  if $update_interval {
-    validate_string($update_interval)
-  }
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_re($target_file_mode, '^\d{4}$')
 
   file {"${target_dir}/${target_file_name}":
     ensure  => $ensure,

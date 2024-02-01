@@ -34,24 +34,6 @@ define icinga2::object::apply_notification_to_service (
   Boolean $refresh_icinga2_service = true
 ) {
 
-  #Do some validation of the class' parameters:
-  validate_string($object_notificationname)
-  validate_string($host_name)
-  validate_string($command)
-  validate_hash($vars)
-  validate_hash($times)
-  if $interval {
-    validate_string($interval)
-  }
-  if $period {
-    validate_string($period)
-  }
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_re($target_file_mode, '^\d{4}$')
-
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {
 

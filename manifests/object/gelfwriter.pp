@@ -10,21 +10,14 @@
 #
 
 define icinga2::object::gelfwriter (
-  $host       = '127.0.0.1',
+  String	$host       = '127.0.0.1',
   $port       = 12201,
-  $source     = undef,
+  Optional[String]	$source     = undef,
   # Put the object files this defined type generates in features-available
   # since the Gelf writer feature is one that has to be explicitly enabled.
   $target_dir = '/etc/icinga2/features-available',
   $file_name  = "${name}.conf",
 ) {
-  # Do some validation
-  validate_string($host)
-
-  if $source {
-    validate_string($source)
-  }
-
   file { "${target_dir}/${file_name}":
     ensure  => file,
     owner   => $::icinga2::config_owner,

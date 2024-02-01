@@ -15,14 +15,6 @@ define icinga2::checkplugin (
   $checkplugin_source_file              = undef,
   $checkplugin_source_inline            = undef,
 ) {
-  #Do some validation of the class' parameters:
-  validate_string($name)
-  validate_string($checkplugin_libdir)
-  validate_string($checkplugin_name)
-  validate_string($checkplugin_target_file_owner)
-  validate_string($checkplugin_target_file_group)
-  validate_string($checkplugin_target_file_mode)
-
   if $checkplugin_file_distribution_method == 'content' {
     file { "${checkplugin_libdir}/${checkplugin_name}":
       owner   => $checkplugin_target_file_owner,

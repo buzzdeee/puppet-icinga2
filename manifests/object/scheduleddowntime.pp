@@ -10,38 +10,22 @@
 #
 
 define icinga2::object::scheduleddowntime (
-  $object_scheduleddowntimename = $name,
-  $host_name                    = undef,
-  $service_name                 = undef,
-  $author                       = undef,
-  $comment                      = undef,
+  String		$object_scheduleddowntimename = $name,
+  Optional[String]	$host_name                    = undef,
+  Optional[String]	$service_name                 = undef,
+  Optional[String]	$author                       = undef,
+  Optional[String]	$comment                      = undef,
   Boolean	$fixed                        = true,
-  $duration                     = undef,
+  Optional[String]	$duration                     = undef,
   $ranges                       = {},
-  $target_dir                   = '/etc/icinga2/objects/scheduleddowntimes',
-  $target_file_name             = "${name}.conf",
+  String		$target_dir                   = '/etc/icinga2/objects/scheduleddowntimes',
+  String		$target_file_name             = "${name}.conf",
   $target_file_ensure           = file,
-  $target_file_owner            = $::icinga2::config_owner,
-  $target_file_group            = $::icinga2::config_group,
-  $target_file_mode             = $::icinga2::config_mode,
+  String		$target_file_owner            = $::icinga2::config_owner,
+  String		$target_file_group            = $::icinga2::config_group,
+  String		$target_file_mode             = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service      = true
 ) {
-
-  #Do some validation of the define's parameters:
-  validate_string($object_scheduleddowntimename)
-  validate_string($host_name)
-  if $service_name {
-    validate_string($service_name)
-  }
-  validate_string($author)
-  validate_string($comment)
-  validate_string($duration)
-  validate_hash($ranges)
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

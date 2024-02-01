@@ -23,14 +23,6 @@ define icinga2::object::apply_scheduleddowntime (
   $file_name    = "${name}.conf",
 ) {
 
-  validate_re($apply, '^(Host|Service)$', 'ScheduledDowntime must either apply to a Host or Service!')
-  validate_string($author)
-  validate_string($comment)
-  validate_string($duration)
-  validate_hash($ranges)
-
-  validate_string($file_name)
-
   file { "icinga2 apply scheduleddowntime ${name}":
     ensure  => file,
     path    => "${target_dir}/${file_name}",

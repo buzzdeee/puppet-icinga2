@@ -6,7 +6,6 @@ class icinga2::feature::syslog (
   $severity = 'warning',
 ) {
 
-  validate_re($severity, '^(debug|notice|information|warning|critical)$')
   ::icinga2::feature { 'syslog':
     content => template('icinga2/feature/syslog.conf.erb'),
   }

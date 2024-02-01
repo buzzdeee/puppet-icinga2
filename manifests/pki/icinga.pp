@@ -3,17 +3,13 @@
 # Takes care about requesting SSL certificates for the Icinga daemon
 #
 class icinga2::pki::icinga (
-  $ticket_salt,
-  $icinga_ca_host,
+  String	$ticket_salt,
+  String	$icinga_ca_host,
   $icinga_ca_port = undef,
   $hostname       = $facts['networking']['fqdn'],
 ) {
 
-  validate_string($ticket_salt)
-  validate_string($icinga_ca_host)
-
   if $icinga_ca_port {
-    validate_numeric($icinga_ca_port)
     $_icinga_ca_port = " --port '${icinga_ca_port}'"
   }
   else {

@@ -4,8 +4,6 @@
 #
 class icinga2::database {
 
-  validate_re($::icinga2::db_type, '^(mysql|pgsql)$', "Database type ${::icinga2::db_type} is not supported!")
-
   if $::icinga2::db_schema {
     $db_schema = $::icinga2::db_schema
   }

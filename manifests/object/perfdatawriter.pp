@@ -11,53 +11,22 @@
 
 define icinga2::object::perfdatawriter (
   $ensure                    = 'file',
-  $object_perfdatawritername = $name,
-  $host_perfdata_path        = undef,
-  $service_perfdata_path     = undef,
-  $host_temp_path            = undef,
-  $service_temp_path         = undef,
-  $host_format_template      = undef,
-  $service_format_template   = undef,
-  $rotation_interval         = undef,
-  $target_dir                = '/etc/icinga2/objects/perfdatawriters',
-  $target_file_name          = "${name}.conf",
+  String		$object_perfdatawritername = $name,
+  Optional[String]	$host_perfdata_path        = undef,
+  Optional[String]	$service_perfdata_path     = undef,
+  Optional[String]	$host_temp_path            = undef,
+  Optional[String]	$service_temp_path         = undef,
+  Optional[String]	$host_format_template      = undef,
+  Optional[String]	$service_format_template   = undef,
+  Optional[String]	$rotation_interval         = undef,
+  String		$target_dir                = '/etc/icinga2/objects/perfdatawriters',
+  String		$target_file_name          = "${name}.conf",
   $target_file_ensure        = file,
-  $target_file_owner         = $::icinga2::config_owner,
-  $target_file_group         = $::icinga2::config_group,
-  $target_file_mode          = $::icinga2::config_mode,
+  String		$target_file_owner         = $::icinga2::config_owner,
+  String		$target_file_group         = $::icinga2::config_group,
+  String		$target_file_mode          = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service   = true
 ) {
-
-  #Do some validation of the class' parameters:
-  if $object_perfdatawritername {
-    validate_string($object_perfdatawritername)
-  }
-  if $host_perfdata_path {
-    validate_string($host_perfdata_path)
-  }
-  if $service_perfdata_path {
-    validate_string($service_perfdata_path)
-  }
-  if $host_temp_path {
-    validate_string($host_temp_path)
-  }
-  if $service_temp_path {
-    validate_string($service_temp_path)
-  }
-  if $host_format_template {
-    validate_string($host_format_template)
-  }
-  if $service_format_template {
-    validate_string($service_format_template)
-  }
-  if $rotation_interval {
-    validate_string($rotation_interval)
-  }
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_re($target_file_mode, '^\d{4}$')
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

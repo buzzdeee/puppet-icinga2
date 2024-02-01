@@ -23,13 +23,6 @@ define icinga2::object::apiuser (
 
   ensure_resource('icinga2::config::objectdir', 'apiusers')
 
-  if $client_cn {
-    validate_string($client_cn)
-  }
-  if $password {
-    validate_string($password)
-  }
-
   file { "${target_dir}/${file_name}":
     ensure  => file,
     owner   => $::icinga2::config_owner,

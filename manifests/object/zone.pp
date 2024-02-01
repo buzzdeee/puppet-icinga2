@@ -10,10 +10,10 @@
 #
 define icinga2::object::zone(
   $endpoints  = undef,
-  Boolean	$global     = false,
-  $parent     = undef,
+  Boolean			$global     = false,
+  Optional[String]		$parent     = undef,
   Stdlib::Compat::String	$target_dir = '/etc/icinga2/objects/zones',
-  $file_name  = "${name}.conf",
+  String 			$file_name  = "${name}.conf",
 ) {
 
   if ! defined(Class['icinga2']) {
@@ -23,7 +23,6 @@ define icinga2::object::zone(
   ensure_resource('icinga2::config::objectdir', 'zones')
 
   if $endpoints {
-    validate_hash($endpoints)
     $_endpoints = keys($endpoints)
 
     create_resources('icinga2::object::endpoint', $endpoints)
@@ -31,16 +30,11 @@ define icinga2::object::zone(
   else {
     $_endpoints = undef
   }
-  if $parent {
-    validate_string($parent)
-  }
   if $global {
     if $endpoints or $parent {
       fail('global zones can\'t have endpoints or parents!')
     }
   }
-
-  validate_string($file_name)
 
   file { "icinga2 object zone ${name}":
     ensure  => file,

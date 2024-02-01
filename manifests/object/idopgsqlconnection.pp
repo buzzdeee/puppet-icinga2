@@ -3,14 +3,14 @@
 # This is a defined type for Icinga 2 IDO Postgres connection objects.
 #
 define icinga2::object::idopgsqlconnection (
-  $object_name          = $name,
-  $host                 = 'localhost',
+  String		$object_name          = $name,
+  String		$host                 = 'localhost',
   $port                 = undef,
-  $user                 = 'icinga',
-  $password             = 'icinga',
-  $database             = 'icinga',
-  $table_prefix         = 'icinga_',
-  $instance_name        = 'default',
+  String		$user                 = 'icinga',
+  String		$password             = 'icinga',
+  String		$database             = 'icinga',
+  String		$table_prefix         = 'icinga_',
+  String		$instance_name        = 'default',
   $instance_description = undef,
   Boolean	$enable_ha            = true,
   $cleanup              = {
@@ -39,15 +39,6 @@ define icinga2::object::idopgsqlconnection (
   if ! defined(Class['icinga2']) {
     fail('You must include the icinga2 base class before using any icinga2 defined resources')
   }
-
-  validate_string($object_name)
-  validate_string($host)
-  validate_string($user)
-  validate_string($password)
-  validate_string($database)
-  validate_string($table_prefix)
-  validate_string($instance_name)
-  validate_hash($cleanup)
 
   Class['icinga2::config'] ->
   file { "${target_dir}/${target_file_name}":

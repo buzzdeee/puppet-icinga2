@@ -10,7 +10,7 @@
 #
 
 define icinga2::object::graphitewriter (
-  $host                   = '127.0.0.1',
+  String	$host                   = '127.0.0.1',
   $port                   = 2003,
   $host_name_template     = undef,
   $service_name_template  = undef,
@@ -24,8 +24,6 @@ define icinga2::object::graphitewriter (
   $target_dir             = '/etc/icinga2/objects/graphitewriters',
   $file_name              = "${name}.conf",
 ) {
-  # Do some validation
-  validate_string($host)
 
   file { "${target_dir}/${file_name}":
     ensure  => file,

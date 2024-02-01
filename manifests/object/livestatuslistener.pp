@@ -10,45 +10,20 @@
 #
 
 define icinga2::object::livestatuslistener (
-  $object_livestatuslistenername  = $name,
-  $socket_type                    = undef,
-  $bind_host                      = undef,
-  $bind_port                      = undef,
-  $socket_path                    = undef,
-  $compat_log_path                = undef,
-  $target_dir                     = '/etc/icinga2/objects/livestatuslisteners',
-  $target_file_name               = "${name}.conf",
+  String		$object_livestatuslistenername  = $name,
+  Optional[String]	$socket_type                    = undef,
+  Optional[String]	$bind_host                      = undef,
+  Optional[String]	$bind_port                      = undef,
+  Optional[String]	$socket_path                    = undef,
+  Optional[String]	$compat_log_path                = undef,
+  String		$target_dir                     = '/etc/icinga2/objects/livestatuslisteners',
+  String		$target_file_name               = "${name}.conf",
   $target_file_ensure             = file,
-  $target_file_owner              = $::icinga2::config_owner,
-  $target_file_group              = $::icinga2::config_group,
-  $target_file_mode               = $::icinga2::config_mode,
+  String		$target_file_owner              = $::icinga2::config_owner,
+  String		$target_file_group              = $::icinga2::config_group,
+  String		$target_file_mode               = $::icinga2::config_mode,
   Boolean	$refresh_icinga2_service        = true
 ) {
-
-  #Do some validation of the class' parameters:
-  if $object_livestatuslistenername {
-    validate_string($object_livestatuslistenername)
-  }
-  if $socket_type {
-    validate_string($socket_type)
-  }
-  if $bind_host {
-    validate_string($bind_host)
-  }
-  if $bind_port {
-    validate_string($bind_port)
-  }
-  if $socket_path {
-    validate_string($socket_path)
-  }
-  if $compat_log_path {
-    validate_string($compat_log_path)
-  }
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_re($target_file_mode, '^\d{4}$')
 
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {

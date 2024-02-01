@@ -30,12 +30,6 @@ define icinga2::conf (
   $target_file_mode  = $::icinga2::config_mode,
 ) {
 
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
-
   $manage_file_source = $source
 
   if $template {

@@ -32,22 +32,6 @@ define icinga2::object::apply_dependency (
   Boolean	$refresh_icinga2_service = true,
 ) {
 
-  # Do some validation of the class' parameters:
-  validate_string($object_name)
-  validate_string($display_name)
-  validate_string($parent_host_name)
-  validate_string($child_host_name)
-  validate_string($child_service_name)
-  validate_string($parent_service_name)
-  validate_string($period)
-  validate_string($target_dir)
-  validate_string($target_file_name)
-  validate_string($target_file_owner)
-  validate_string($target_file_group)
-  validate_string($target_file_mode)
-
-  validate_re($object_type, ['^Host', '^Service'])
-
   #If the refresh_icinga2_service parameter is set to true...
   if $refresh_icinga2_service == true {
 
