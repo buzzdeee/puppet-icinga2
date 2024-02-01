@@ -8,9 +8,9 @@
 class icinga2::feature::api (
   Boolean 	$accept_commands = false,
   Boolean	$accept_config   = false,
-  $ca_path         = '/etc/icinga2/pki/ca.crt',
-  $cert_path       = "/etc/icinga2/pki/${facts['networking']['fqdn']}.crt",
-  $key_path        = "/etc/icinga2/pki/${facts['networking']['fqdn']}.key",
+  Stdlib::Compat::Absolute_Path	$ca_path         = '/etc/icinga2/pki/ca.crt',
+  Stdlib::Compat::Absolute_Path	$cert_path       = "/etc/icinga2/pki/${facts['networking']['fqdn']}.crt",
+  Stdlib::Compat::Absolute_Path	$key_path        = "/etc/icinga2/pki/${facts['networking']['fqdn']}.key",
   $crl_path        = undef,
   $bind_host       = undef,
   $bind_port       = undef,
@@ -19,10 +19,6 @@ class icinga2::feature::api (
   Boolean	$manage_zone     = true,
   $parent_zone     = undef,
 ) {
-
-  validate_absolute_path($ca_path)
-  validate_absolute_path($cert_path)
-  validate_absolute_path($key_path)
 
   if $bind_host {
     validate_string($bind_host)

@@ -16,7 +16,6 @@ class icinga2::database {
       default => undef,
     }
   }
-  validate_absolute_path($db_schema)
 
   if $::icinga2::db_type == 'mysql' {
     include ::icinga2::feature::ido_mysql
