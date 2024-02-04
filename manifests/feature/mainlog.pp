@@ -4,7 +4,7 @@
 #
 class icinga2::feature::mainlog (
   $severity = 'information',
-  Stdlib::Compat::String	$path     = '/var/log/icinga2/icinga2.log'
+  $path     = '/var/log/icinga2/icinga2.log'
 ) {
 
   $object_name = 'mainlog'

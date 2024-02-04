@@ -3,7 +3,7 @@
 # Manage and enable the default log of Icinga2
 #
 class icinga2::feature::command (
-  Optional[Stdlib::Compat::String]	$command_path = undef,
+  $command_path = undef,
 ) {
 
   ::icinga2::feature { 'command':

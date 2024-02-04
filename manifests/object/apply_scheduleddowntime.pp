@@ -19,7 +19,7 @@ define icinga2::object::apply_scheduleddowntime (
   $ignore_where = undef,
   Optional[Boolean]	$fixed        = undef,
   $duration     = undef,
-  Stdlib::Compat::String	$target_dir   = '/etc/icinga2/objects/applys',
+  $target_dir   = '/etc/icinga2/objects/applys',
   $file_name    = "${name}.conf",
 ) {
 

@@ -13,7 +13,7 @@ define icinga2::object::endpoint (
   Optional[String]	$host         = undef,
   $port         = undef,
   Optional[String]	$log_duration = undef,
-  Stdlib::Compat::String	$target_dir   = '/etc/icinga2/objects/endpoints',
+  $target_dir   = '/etc/icinga2/objects/endpoints',
   $file_name    = "${name}.conf",
 ) {
 

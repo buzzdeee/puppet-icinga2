@@ -32,7 +32,7 @@ define icinga2::object::idopgsqlconnection (
   },
   Array		$categories           = [],
   $target_file_name     = "${name}.conf",
-  Stdlib::Compat::String	$target_dir           = '/etc/icinga2/objects/idopgsqlconnections',
+  $target_dir           = '/etc/icinga2/objects/idopgsqlconnections',
   Boolean	$refresh_service      = $::icinga2::manage_service,
 ) {
 

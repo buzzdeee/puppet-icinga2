@@ -4,7 +4,7 @@
 #
 class icinga2::feature::debuglog (
   $severity = 'debug',
-  Stdlib::Compat::String	$path     = '/var/log/icinga2/debug.log'
+  $path     = '/var/log/icinga2/debug.log'
 ) {
 
   ::icinga2::feature { 'debuglog':
