@@ -11,7 +11,7 @@
 
 define icinga2::object::host (
   String	$object_hostname         = $name,
-  String	$display_name            = $fqdn,
+  String	$display_name            = $facts['networking']['fqdn'],
   String	$ipv4_address            = $ipaddress,
   $ipv6_address            = undef,
   Boolean	$is_template             = false,

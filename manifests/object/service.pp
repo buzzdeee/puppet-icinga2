@@ -13,7 +13,7 @@ define icinga2::object::service (
   $is_template             = false,
   Array		$templates               = ['generic-service'],
   String		$display_name            = $name,
-  String		$host_name               = $fqdn,
+  String		$host_name               = $facts['networking']['fqdn'],
   Optional[String]	$command_endpoint        = undef,
   Array		$groups                  = [],
   $vars                    = {},
