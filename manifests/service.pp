@@ -3,7 +3,7 @@
 # This class manages the Icinga 2 daemon.
 #
 class icinga2::service {
-  $config_stamp = '/var/lib/icinga2/.puppet-config-stamp'
+  $config_stamp = '/var/db/icinga2/.puppet-config-stamp'
 
   Exec {
     path => $::path,
